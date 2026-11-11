@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>布料模拟 · 丝袜与百褶裙</title>
+<style>
+  html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;color:#e8e8ea}
+  canvas{display:block;touch-action:none}
+  #panel{position:fixed;top:16px;right:16px;width:232px;padding:14px 16px;border-radius:16px;
+    background:rgba(28,28,32,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:13px;user-select:none}
+  #panel h1{font-size:14px;margin:0 0 10px;font-weight:600}
+  .row{display:flex;align-items:center;justify-content:space-between;margin:9px 0;gap:8px}
+  .row label{flex:0 0 76px;color:#b9b9c0}
+  .row input[type=range]{flex:1;accent-color:#0a84ff;min-width:0}
+  .seg{display:flex;gap:6px}
+  .sw{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer}
+  .sw.on{border-color:#0a84ff}
+  button{background:#0a84ff;color:#fff;border:0;border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer}
+  button.ghost{background:rgba(255,255,255,.12)}
+  #hint{position:fixed;left:16px;bottom:14px;font-size:12px;color:#9a9aa2;line-height:1.7;pointer-events:none}
+  #fps{position:fixed;left:16px;top:14px;font-size:12px;color:#77777f;pointer-events:none}
+  #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:#aaa;background:#000}
+</style>
+<script type="importmap">
+{"imports":{"three":"./vendor/three.module.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}
+</script>
+</head>
+<body>
+<div id="loading">正在加载模型…</div>
+<div id="fps"></div>
+<div id="panel">
+  <h1>布料模拟</h1>
+  <div class="row"><label>丝袜颜色</label><div class="seg" id="colors"></div></div>
+  <div class="row"><label>厚度</label><input id="denier" type="range" min="0.12" max="0.75" step="0.01" value="0.34"></div>
+  <div class="row"><label>弹性(松↔紧)</label><input id="stiff" type="range" min="0" max="1" step="0.01" value="0.5"></div>
+  <div class="row"><label>风力</label><input id="wind" type="range" min="0" max="8" step="0.1" value="0"></div>
+  <div class="row"><label>线框</label><input id="wire" type="checkbox"></div>
+  <div class="row"><button id="twist">扭一下</button><button id="reset" class="ghost">重置</button></div>
+</div>
+<div id="hint">左键按住丝袜或裙子拖拽 · 左键拖空白处 / 右键旋转视角 · 滚轮缩放</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
